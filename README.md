@@ -1,6 +1,6 @@
 # food_delivery
 
-Nước mắt em đang rơi trên những dòng code   T.T
+Nước mắt em đang rơi trên những dòng code   ><
 
 
 

@@ -1,0 +1,2 @@
+D:/Nam 5/HK2/DO_AN/food_delivery/android/app/.cxx/Debug/wt6dn3v5/x86/CMakeFiles/edit_cache.dir
+D:/Nam 5/HK2/DO_AN/food_delivery/android/app/.cxx/Debug/wt6dn3v5/x86/CMakeFiles/rebuild_cache.dir

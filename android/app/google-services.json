@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "560537963158",
+    "project_id": "flutter-ecommerce-f05a3",
+    "storage_bucket": "flutter-ecommerce-f05a3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560537963158:android:ff042147d62545866fd0b7",
+        "android_client_info": {
+          "package_name": "com.example.food_delivery"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_TPFlhHu0Mr1hDrvoTbr48LK0bPLdcG8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

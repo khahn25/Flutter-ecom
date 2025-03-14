@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/components/AppSignIn.dart';
 
-class AppSingUp extends StatelessWidget {
+class AppSignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String defaultFontFamily = 'Roboto-Light.ttf';

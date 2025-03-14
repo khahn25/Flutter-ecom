@@ -183,7 +183,7 @@ class _AppSignInState extends State<AppSignIn> {
                       onTap: () => {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => AppSingUp()),
+                          MaterialPageRoute(builder: (context) => AppSignUp()),
                         )
                       },
                       child: Container(

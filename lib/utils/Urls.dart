@@ -1,4 +1,4 @@
 class Urls {
 
-static const ROOT_URL=" https://api-beta.evaly.com.bd/core ";
+static const CORE_BASE_URL=" https://api-beta.evaly.com.bd/core ";
 }

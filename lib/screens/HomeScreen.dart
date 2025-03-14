@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         children: <Widget>[
           SearchWidget(),
-          // TopPromoSlider(),
+          TopPromoSlider(),
           // PopularMenu(),
           SizedBox(
             height: 10,
@@ -56,7 +56,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 //   color: Colors.white24,
                 //   child: CategoryPage(slug: 'categories/'),
                 // ),
-                // /
+                // Container(
+                //   color: Colors.white24,
+                //   child: BrandHomePage(slug: 'brands/?limit=20&page=1'),
+                // ),
                 // Container(
                 //   color: Colors.white24,
                 //   child: ShopHomePage(

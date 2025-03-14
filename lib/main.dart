@@ -4,8 +4,12 @@ import 'package:food_delivery/common_widget/AppBarWidget.dart';
 import 'package:food_delivery/components/AppSignIn.dart';
 import 'package:food_delivery/screens/HomeScreen.dart';
 import 'package:food_delivery/common_widget/BottomNavBarWidget.dart';
+import 'package:food_delivery/common_widget/DrawerWidget.dart';
+import 'package:food_delivery/screens/ShoppingCartScreen.dart';
+
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:food_delivery/screens/WishListScreen.dart';
 
 
 
@@ -38,8 +42,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageNewState extends State<MyHomePage> {
   final List<Widget> viewContainer = [
     HomeScreen(),
-    // WishListScreen(),
-    // ShoppingCartScreen(),
+    WishListScreen(),
+    ShoppingCartScreen(),
     HomeScreen()
   ];
 
@@ -50,7 +54,7 @@ class _MyHomePageNewState extends State<MyHomePage> {
       length: 3,
       child: Scaffold(
         appBar: appBarWidget(context),
-        // drawer: DrawerWidget(),
+        drawer: DrawerWidget(),
         body: IndexedStack(
           index: currentIndex,
           children: viewContainer,

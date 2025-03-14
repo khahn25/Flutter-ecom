@@ -9,9 +9,9 @@ PreferredSizeWidget appBarWidget(BuildContext context) {
     elevation: 0.0,
     centerTitle: true,
     title: Image.asset(
-      "assets/images/ic_app_icon.png",
-      width: 80,
-      height: 40,
+      "assets/images/hehe.png",
+      width: 100,
+      height: 50,
     ),
     actions: <Widget>[
       IconButton(

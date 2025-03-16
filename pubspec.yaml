@@ -80,6 +80,11 @@ flutter:
     - assets/images/empty_wish_list.png
    
     - assets/images/hehe.png
+    - assets/images/ads.png
+    - assets/images/adss.png
+
+
+    
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

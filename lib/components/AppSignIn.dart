@@ -46,7 +46,7 @@ class _AppSignInState extends State<AppSignIn> {
                     width: 130,
                     height: 130,
                     alignment: Alignment.center,
-                    child: Image.asset("assets/images/ic_app_icon.png"),
+                    child: Image.asset("assets/images/hehe.png"),
                   ),
                   SizedBox(
                     height: 15,

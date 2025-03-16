@@ -21,9 +21,10 @@ class TopPromoSlider extends StatelessWidget {
             scrollDirection: Axis.horizontal,
           ),
           items: [
-            "assets/images/promotion__one.png",
+            "assets/images/ads.png",
             "assets/images/promotion_two.png",
-            "assets/images/promotion_three.png"
+            "assets/images/promotion_three.png",
+            "assets/images/adss.png"
           ].map((imagePath) {
             return Image.asset(
               imagePath,

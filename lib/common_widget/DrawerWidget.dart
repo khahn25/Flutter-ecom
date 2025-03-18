@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/main.dart';
+import 'package:food_delivery/screens/ShoppingCartScreen.dart';
 import 'package:food_delivery/screens/WishListScreen.dart';
 import 'package:food_delivery/components/AppSignIn.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -47,6 +48,14 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => EmptyWishListScreen()),
+                    )),
+            _createDrawerItem(
+                icon: Icons.shopping_bag,
+                text: 'Shopping',
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ShoppingCartScreen()),
                     )),
           ],
         ),

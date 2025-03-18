@@ -13,7 +13,7 @@ class TopPromoSlider extends StatelessWidget {
             height: 150.0,
             autoPlay: true,
             enlargeCenterPage: true,
-            viewportFraction: 1.0, // Hiển thị toàn bộ ảnh
+            viewportFraction: 1.0, 
             autoPlayInterval: Duration(seconds: 3),
             autoPlayAnimationDuration: Duration(milliseconds: 800),
             autoPlayCurve: Curves.fastOutSlowIn,
@@ -22,7 +22,7 @@ class TopPromoSlider extends StatelessWidget {
           ),
           items: [
             "assets/images/ads.png",
-            "assets/images/promotion_two.png",
+            // "assets/images/promotion_two.png",
             "assets/images/promotion_three.png",
             "assets/images/adss.png"
           ].map((imagePath) {

@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   
-  
+  flutter_native_splash: ^2.4.5
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -73,7 +73,7 @@ flutter:
     - assets/images/promotion_two.png
     - assets/images/promotion__one.png
     - assets/images/promotion_three.png
-    - assets/images/ic_app_icon.png
+    # - assets/images/ic_app_icon.png
     - assets/images/ic_category_image.png
     - assets/images/empty_shopping_cart_image.png
     - assets/images/empty_shopping_cart.png
@@ -82,6 +82,9 @@ flutter:
     - assets/images/hehe.png
     - assets/images/ads.png
     - assets/images/adss.png
+    - assets/images/welcome.png
+
+
 
 
     
@@ -131,3 +134,10 @@ flutter:
   
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_native_splash:
+  color: "#ffffff"  # Màu nền của Splash Screen (có thể thay đổi)
+  image: assets/images/welcome.png  # Đường dẫn logo hiển thị
+  android_12:
+    image: assets/images/welcome.png
+    icon_background_color: "#ffffff"
+

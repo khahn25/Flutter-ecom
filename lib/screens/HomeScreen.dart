@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/components/BrandHomePage.dart';
-// import 'package:food_delivery/components/CategorySlider.dart';
-// import 'package:food_delivery/common_widget/PopularMenu.dart';
+import 'package:food_delivery/components/CategorySlider.dart';
+import 'package:food_delivery/common_widget/PopularMenu.dart';
 import 'package:food_delivery/common_widget/SearchWidget.dart';
 import 'package:food_delivery/common_widget/TopPromoSlider.dart';
 import 'package:food_delivery/components/ShopHomePage.dart';
@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: <Widget>[
           SearchWidget(),
           TopPromoSlider(),
-          // PopularMenu(),
+          PopularMenu(),
           SizedBox(
             height: 10,
             child: Container(
@@ -52,20 +52,20 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: TabBarView(
               children: [
-                // Container(
-                //   color: Colors.white24,
-                //   child: CategoryPage(slug: 'categories/'),
-                // ),
-                // Container(
-                //   color: Colors.white24,
-                //   child: BrandHomePage(slug: 'brands/?limit=20&page=1'),
-                // ),
-                // Container(
-                //   color: Colors.white24,
-                //   child: ShopHomePage(
-                //     slug: 'custom/shops/?page=1&limit=15',
-                //   ),
-                // ) // class name
+                Container(
+                  color: Colors.white24,
+                  child: CategoryPage(slug: 'categories/'),
+                ),
+                Container(
+                  color: Colors.white24,
+                  child: BrandHomePage(slug: 'brands/?limit=20&page=1'),
+                ),
+                Container(
+                  color: Colors.white24,
+                  child: ShopHomePage(
+                    slug: 'custom/shops/?page=1&limit=15',
+                  ),
+                ) // class name
               ],
             ),
           ),

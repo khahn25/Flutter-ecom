@@ -43,9 +43,9 @@ class SubCategoryScreen extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    // CategoryPage(slug: 'categories/?parent=$slug', isSubList: true),
+                    CategoryPage(slug: 'categories/?parent=$slug', isSubList: true),
                     BrandHomePage(slug: 'brands/?limit=20&page=1&category=$slug', isSubList: true),
-                    // ShopHomePage(slug: 'category/shops/$slug/?page=1&limit=15', isSubList: true),
+                    ShopHomePage(slug: 'category/shops/$slug/?page=1&limit=15', isSubList: true),
                   ],
                 ),
               ),

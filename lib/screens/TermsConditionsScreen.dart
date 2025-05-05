@@ -31,7 +31,6 @@ class TermsConditionsScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          // Logo và thanh tìm kiếm
           Padding(
             padding: EdgeInsets.all(16.0),
             child: Column(

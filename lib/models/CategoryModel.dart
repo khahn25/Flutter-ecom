@@ -1,27 +1,36 @@
 class CategoryModel {
-  final String name;
-  final String slug;
-  final String imageUrl;
+  int? id;
+  String? name;
+  String? slug;
+  String? image;
+  String? creationAt;
+  String? updatedAt;
 
-  CategoryModel({
-    required this.name,
-    required this.slug,
-    required this.imageUrl,
-  });
+  CategoryModel(
+      {this.id,
+      this.name,
+      this.slug,
+      this.image,
+      this.creationAt,
+      this.updatedAt});
 
-  factory CategoryModel.fromJson(Map<String, dynamic> json) {
-    return CategoryModel(
-      name: json['name'] ?? '',
-      slug: json['slug'] ?? '',
-      imageUrl: json['image_url'] ?? '',
-    );
+  CategoryModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    slug = json['slug'];
+    image = json['image'];
+    creationAt = json['creationAt'];
+    updatedAt = json['updatedAt'];
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'slug': slug,
-      'image_url': imageUrl,
-    };
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['slug'] = this.slug;
+    data['image'] = this.image;
+    data['creationAt'] = this.creationAt;
+    data['updatedAt'] = this.updatedAt;
+    return data;
   }
 }

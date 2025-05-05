@@ -1,7 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-// import 'package:food_delivery/screens/ProductsScreen.dart';
+import 'package:food_delivery/screens/ProductsScreen.dart';
 import 'package:food_delivery/screens/SubCategoryScreen.dart';
+
 
 class GridTilesCategory extends StatelessWidget {
   final String name;
@@ -23,15 +24,15 @@ class GridTilesCategory extends StatelessWidget {
       onTap: () {
         if (fromSubProducts) {
           log(slug);
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => ProductsScreen(
-          //       slug: "products/?page=1&limit=12&category=$slug",
-          //       name: name,
-          //     ),
-          //   ),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProductsScreen(
+                slug: "/products",
+                name: name,
+              ),
+            ),
+          );
         } else {
           Navigator.push(
             context,

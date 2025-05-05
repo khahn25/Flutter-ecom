@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/models/CategoryModel.dart';
 import 'package:food_delivery/common_widget/CircularProgress.dart';
@@ -36,14 +35,16 @@ class _CategoryPageState extends State<CategoryPage> {
 
     try {
       final response = await http.get(Uri.parse(Urls.CORE_BASE_URL + widget.slug));
+
       if (response.statusCode == 200) {
         final List<dynamic> body = json.decode(response.body);
+
         setState(() {
           categories = body.map((item) => CategoryModel.fromJson(item)).toList();
           isLoading = false;
         });
       } else {
-        throw Exception('Failed to load categories');
+        throw Exception('Failed to load categories: ${response.statusCode}');
       }
     } catch (e) {
       setState(() {
@@ -64,7 +65,7 @@ class _CategoryPageState extends State<CategoryPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(errorMessage!, style: TextStyle(color: Colors.red)),
+            Text(errorMessage!, style: const TextStyle(color: Colors.red)),
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: _fetchCategoryList,
@@ -92,10 +93,11 @@ class _CategoryPageState extends State<CategoryPage> {
         itemCount: categories.length,
         itemBuilder: (context, index) {
           final item = categories[index];
+
           return GridTilesCategory(
-            name: item.name,
-            imageUrl: item.imageUrl,
-            slug: item.slug,
+            name: item.name ?? 'No Name',
+            imageUrl: item.image ?? '', // đảm bảo không null
+            slug: item.slug ?? '',       // nếu cần dùng để dẫn tới chi tiết
             fromSubProducts: widget.isSubList,
           );
         },

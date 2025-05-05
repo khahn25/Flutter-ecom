@@ -20,7 +20,7 @@ class GridTilesProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        log("Navigating to: products/$slug/");
+        log("Navigating to: $slug");
         Navigator.push(
           context,
           MaterialPageRoute(

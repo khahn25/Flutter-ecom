@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food_delivery/components/AppSignUp.dart';
+import 'package:food_delivery/main.dart';
+import 'package:food_delivery/screens/HomeScreen.dart';
 
 class AppSignIn extends StatefulWidget {
   @override
@@ -8,6 +10,28 @@ class AppSignIn extends StatefulWidget {
 }
 
 class _AppSignInState extends State<AppSignIn> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  // Đăng nhập người dùng
+  Future<void> signInUser() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      // Điều hướng đến HomePage nếu đăng nhập thành công
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => MyHomePage()),
+      );
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Login failed: ${e.message}")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     String defaultFontFamily = 'Roboto-Light.ttf';
@@ -15,7 +39,7 @@ class _AppSignInState extends State<AppSignIn> {
     double defaultIconSize = 17;
 
     return Scaffold(
-      resizeToAvoidBottomInset: true, // Cho phép co lại khi bàn phím hiện
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.only(left: 20, right: 20, top: 35, bottom: 30),
@@ -52,6 +76,7 @@ class _AppSignInState extends State<AppSignIn> {
                       ),
                       SizedBox(height: 15),
                       TextField(
+                        controller: emailController,
                         showCursor: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -60,7 +85,7 @@ class _AppSignInState extends State<AppSignIn> {
                           ),
                           filled: true,
                           prefixIcon: Icon(
-                            Icons.phone,
+                            Icons.email,
                             color: Color(0xFF666666),
                             size: defaultIconSize,
                           ),
@@ -70,12 +95,14 @@ class _AppSignInState extends State<AppSignIn> {
                             fontFamily: defaultFontFamily,
                             fontSize: defaultFontSize,
                           ),
-                          hintText: "Phone Number",
+                          hintText: "Email",
                         ),
                       ),
                       SizedBox(height: 15),
                       TextField(
+                        controller: passwordController,
                         showCursor: true,
+                        obscureText: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -104,20 +131,6 @@ class _AppSignInState extends State<AppSignIn> {
                       SizedBox(height: 15),
                       Container(
                         width: double.infinity,
-                        child: Text(
-                          "Forgot your password?",
-                          style: TextStyle(
-                            color: Color(0xFF666666),
-                            fontFamily: defaultFontFamily,
-                            fontSize: defaultFontSize,
-                            fontStyle: FontStyle.normal,
-                          ),
-                          textAlign: TextAlign.end,
-                        ),
-                      ),
-                      SizedBox(height: 15),
-                      Container(
-                        width: double.infinity,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.0),
                           color: Color(0xFFF2F3F7),
@@ -130,7 +143,7 @@ class _AppSignInState extends State<AppSignIn> {
                               borderRadius: BorderRadius.circular(15.0),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: signInUser,
                           child: Text(
                             "Sign In",
                             style: TextStyle(

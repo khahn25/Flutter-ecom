@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/common_widget/CircularProgress.dart';
 import 'package:food_delivery/common_widget/GridTilesCategory.dart';
 import 'package:food_delivery/models/ShopModel.dart';
-import 'package:food_delivery/utils/Urls.dart';
 import 'package:http/http.dart' as http;
 
 class ShopHomePage extends StatefulWidget {
@@ -18,33 +17,37 @@ class ShopHomePage extends StatefulWidget {
 }
 
 class _ShopHomePageState extends State<ShopHomePage> {
-  ShopModel? shopModel;
+  List<ShopModel> productList = [];
   bool isLoading = true;
   String? errorMessage;
 
   @override
   void initState() {
     super.initState();
-    _fetchShops();
+    _fetchProducts();
   }
 
-  Future<void> _fetchShops() async {
+  Future<void> _fetchProducts() async {
     setState(() {
       isLoading = true;
       errorMessage = null;
     });
 
+    final url = 'https://api.escuelajs.co/api/v1/products';
+
     try {
-      final response = await http.get(Uri.parse(Urls.CORE_BASE_URL + widget.slug));
+      final response = await http.get(Uri.parse(url));
+
       if (response.statusCode == 200) {
-        final body = json.decode(response.body);
-        log(body.toString());
+        final List<dynamic> body = json.decode(response.body);
+        log('Product API Response: $body');
+
         setState(() {
-          shopModel = ShopModel.fromJson(body);
+          productList = body.map((item) => ShopModel.fromJson(item)).toList();
           isLoading = false;
         });
       } else {
-        throw Exception('Failed to load shops');
+        throw Exception('Failed to load products');
       }
     } catch (e) {
       setState(() {
@@ -56,9 +59,7 @@ class _ShopHomePageState extends State<ShopHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      return  CircularProgress();
-    }
+    if (isLoading) return CircularProgress();
 
     if (errorMessage != null) {
       return Center(
@@ -68,7 +69,7 @@ class _ShopHomePageState extends State<ShopHomePage> {
             Text(errorMessage!, style: const TextStyle(color: Colors.red)),
             const SizedBox(height: 10),
             ElevatedButton(
-              onPressed: _fetchShops,
+              onPressed: _fetchProducts,
               child: const Text('Try Again'),
             ),
           ],
@@ -76,32 +77,30 @@ class _ShopHomePageState extends State<ShopHomePage> {
       );
     }
 
-    if (shopModel == null || shopModel!.data.isEmpty) {
-      return const Center(child: Text('No shops found.'));
+    if (productList.isEmpty) {
+      return const Center(child: Text('No products found.'));
     }
 
     return RefreshIndicator(
-      onRefresh: _fetchShops,
+      onRefresh: _fetchProducts,
       child: GridView.builder(
         padding: const EdgeInsets.all(8.0),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
+          crossAxisCount: 2,
           crossAxisSpacing: 8.0,
           mainAxisSpacing: 8.0,
-          childAspectRatio: 8.0 / 9.0,
+          childAspectRatio: 8.0 / 10.0,
         ),
-        itemCount: shopModel!.data.length,
+        itemCount: productList.length,
         itemBuilder: (context, index) {
-          final item = shopModel!.data[index];
+          final item = productList[index];
           return GridTilesCategory(
-            name: item.shopName,
-            imageUrl: item.shopImage,
-            slug: item.slug,
+            name: item.title ?? 'No Title',
+            imageUrl: (item.images?.isNotEmpty ?? false) ? item.images!.first : '',
+            slug: item.slug ?? '',
           );
         },
       ),
     );
   }
 }
-
-//https://api.evaly.com.bd/core/public/category/shops/bags-luggage-966bc8aac/?page=1&limit=15

@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Tab(
                   text: 'Shops',
                 )
-              ], // list of tabs
+              ],
             ),
           ),
           SizedBox(
@@ -54,18 +54,18 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Container(
                   color: Colors.white24,
-                  child: CategoryPage(slug: 'categories/'),
+                  child: CategoryPage(slug: 'categories'),
                 ),
                 Container(
                   color: Colors.white24,
-                  child: BrandHomePage(slug: 'brands/?limit=20&page=1'),
+                  child: BrandHomePage(slug: 'public/shop/brands/'),
                 ),
                 Container(
                   color: Colors.white24,
                   child: ShopHomePage(
-                    slug: 'custom/shops/?page=1&limit=15',
+                    slug: '/shops/?page=1&limit=5',
                   ),
-                ) // class name
+                )
               ],
             ),
           ),

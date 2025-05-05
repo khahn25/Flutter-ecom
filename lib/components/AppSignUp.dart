@@ -1,7 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food_delivery/components/AppSignIn.dart';
+import 'package:food_delivery/screens/HomeScreen.dart';
 
-class AppSignUp extends StatelessWidget {
+class AppSignUp extends StatefulWidget {
+  @override
+  _AppSignUpState createState() => _AppSignUpState();
+}
+
+class _AppSignUpState extends State<AppSignUp> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  // Đăng ký người dùng
+  Future<void> signUpUser() async {
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      // Điều hướng đến HomePage nếu đăng ký thành công
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Signup failed: ${e.message}")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     String defaultFontFamily = 'Roboto-Light.ttf';
@@ -32,51 +61,8 @@ class AppSignUp extends StatelessWidget {
                 child: Image.asset("assets/images/hehe.png"),
               ),
               SizedBox(height: 15),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextField(
-                      showCursor: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                        fillColor: Color(0xFFF2F3F5),
-                        hintStyle: TextStyle(
-                          color: Color(0xFF666666),
-                          fontFamily: defaultFontFamily,
-                          fontSize: defaultFontSize,
-                        ),
-                        hintText: "First Name",
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: TextField(
-                      showCursor: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                        fillColor: Color(0xFFF2F3F5),
-                        hintStyle: TextStyle(
-                          color: Color(0xFF666666),
-                          fontFamily: defaultFontFamily,
-                          fontSize: defaultFontSize,
-                        ),
-                        hintText: "Last Name",
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 15),
               TextField(
+                controller: emailController,
                 showCursor: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -85,7 +71,7 @@ class AppSignUp extends StatelessWidget {
                   ),
                   filled: true,
                   prefixIcon: Icon(
-                    Icons.phone,
+                    Icons.email,
                     color: Color(0xFF666666),
                     size: defaultIconSize,
                   ),
@@ -95,12 +81,14 @@ class AppSignUp extends StatelessWidget {
                     fontFamily: defaultFontFamily,
                     fontSize: defaultFontSize,
                   ),
-                  hintText: "Phone Number",
+                  hintText: "Email",
                 ),
               ),
               SizedBox(height: 15),
               TextField(
+                controller: passwordController,
                 showCursor: true,
+                obscureText: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -108,7 +96,12 @@ class AppSignUp extends StatelessWidget {
                   ),
                   filled: true,
                   prefixIcon: Icon(
-                    Icons.code,
+                    Icons.lock_outline,
+                    color: Color(0xFF666666),
+                    size: defaultIconSize,
+                  ),
+                  suffixIcon: Icon(
+                    Icons.remove_red_eye,
                     color: Color(0xFF666666),
                     size: defaultIconSize,
                   ),
@@ -118,29 +111,8 @@ class AppSignUp extends StatelessWidget {
                     fontFamily: defaultFontFamily,
                     fontSize: defaultFontSize,
                   ),
-                  hintText: "Invitation Code",
+                  hintText: "Password",
                 ),
-              ),
-              SizedBox(height: 10),
-              Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.info_outline,
-                    color: Color(0xFF666666),
-                    size: defaultIconSize,
-                  ),
-                  Expanded(
-                    child: Text(
-                      " Leave empty if you don't have Invitation Code",
-                      style: TextStyle(
-                        color: Color(0xFF666666),
-                        fontFamily: defaultFontFamily,
-                        fontSize: defaultFontSize,
-                        fontStyle: FontStyle.normal,
-                      ),
-                    ),
-                  ),
-                ],
               ),
               SizedBox(height: 15),
               Container(
@@ -157,7 +129,7 @@ class AppSignUp extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: signUpUser,
                   child: Text(
                     "Sign Up",
                     style: TextStyle(
@@ -170,35 +142,37 @@ class AppSignUp extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "Already have an account? ",
-                    style: TextStyle(
-                      color: Color(0xFF666666),
-                      fontFamily: defaultFontFamily,
-                      fontSize: defaultFontSize,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AppSignIn()),
-                      );
-                    },
-                    child: Text(
-                      "Sign In",
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "Already have an account? ",
                       style: TextStyle(
-                        color: Color(0xFFAC252B),
+                        color: Color(0xFF666666),
                         fontFamily: defaultFontFamily,
                         fontSize: defaultFontSize,
                       ),
                     ),
-                  ),
-                ],
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AppSignIn()),
+                        );
+                      },
+                      child: Text(
+                        "Sign In",
+                        style: TextStyle(
+                          color: Color(0xFFAC252B),
+                          fontFamily: defaultFontFamily,
+                          fontSize: defaultFontSize,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

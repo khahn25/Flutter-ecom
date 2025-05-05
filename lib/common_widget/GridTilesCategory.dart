@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/screens/ProductsScreen.dart';
 import 'package:food_delivery/screens/SubCategoryScreen.dart';
 
+
 class GridTilesCategory extends StatelessWidget {
   final String name;
   final String imageUrl;
@@ -27,7 +28,7 @@ class GridTilesCategory extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => ProductsScreen(
-                slug: "products/?page=1&limit=12&category=$slug",
+                slug: "/products",
                 name: name,
               ),
             ),

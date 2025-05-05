@@ -96,8 +96,8 @@ class _CategoryPageState extends State<CategoryPage> {
 
           return GridTilesCategory(
             name: item.name ?? 'No Name',
-            imageUrl: item.image ?? '', // đảm bảo không null
-            slug: item.slug ?? '',       // nếu cần dùng để dẫn tới chi tiết
+            imageUrl: item.image ?? '', 
+            slug: item.slug ?? '',       
             fromSubProducts: widget.isSubList,
           );
         },

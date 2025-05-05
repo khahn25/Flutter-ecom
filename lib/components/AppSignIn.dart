@@ -13,14 +13,13 @@ class _AppSignInState extends State<AppSignIn> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  // Đăng nhập người dùng
   Future<void> signInUser() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-      // Điều hướng đến HomePage nếu đăng nhập thành công
+      
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => MyHomePage()),

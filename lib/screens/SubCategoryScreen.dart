@@ -52,7 +52,7 @@ class SubCategoryScreen extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: BottomNavBarWidget(), // Xóa `const` nếu có trạng thái
+        bottomNavigationBar: BottomNavBarWidget(), 
       ),
     );
   }

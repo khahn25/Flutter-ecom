@@ -16,9 +16,9 @@ class BrandModel {
       count: json['count'] ?? 0,
       next: json['next'],
       previous: json['previous'],
-      results: (json['results'] as List<dynamic>?)
+      results: (json['results'] as List<dynamic>? )
               ?.map((e) => Results.fromJson(e))
-              .toList() ??
+              .toList() ?? 
           [],
     );
   }
@@ -34,28 +34,32 @@ class BrandModel {
 }
 
 class Results {
-  final String name;
-  final String slug;
+  final String id;  
+  final String label;  
+  final String value;  
   final String imageUrl;
 
   Results({
-    required this.name,
-    required this.slug,
+    required this.id,
+    required this.label,
+    required this.value,
     required this.imageUrl,
   });
 
   factory Results.fromJson(Map<String, dynamic> json) {
     return Results(
-      name: json['name'] ?? '',
-      slug: json['slug'] ?? '',
+      id: json['_id'] ?? '',  
+      label: json['label'] ?? '',
+      value: json['value'] ?? '',
       imageUrl: json['image_url'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
-      'slug': slug,
+      'id': id,  
+      'label': label,
+      'value': value,
       'image_url': imageUrl,
     };
   }

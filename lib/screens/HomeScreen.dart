@@ -54,16 +54,16 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Container(
                   color: Colors.white24,
-                  child: CategoryPage(slug: 'categories'),
+                  child: CategoryPage(slug: '/products'),
                 ),
                 Container(
                   color: Colors.white24,
-                  child: BrandHomePage(slug: 'public/shop/brands/'),
+                  child: BrandHomePage(slug: '/brands'),
                 ),
                 Container(
                   color: Colors.white24,
                   child: ShopHomePage(
-                    slug: '/shops/?page=1&limit=5',
+                    slug: '/products',
                   ),
                 )
               ],

@@ -95,10 +95,11 @@ Widget createListView(BuildContext context, ProductsModels values) {
       final product = values.results[index];
       return GridTile(
         child: GridTilesProducts(
-          name: product.name,
-          imageUrl: product.imageUrls.isNotEmpty ? product.imageUrls[0] : '',
-          slug: product.slug,
-          price: product.maxPrice,
+          name: product.title,
+          imageUrl: product.thumbnail,
+          slug: product.id, // hoặc route bạn cần
+          price: product.discountPrice?.toString() ?? product.price.toString(),
+
         ),
       );
     },

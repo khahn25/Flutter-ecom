@@ -45,7 +45,7 @@ class SubCategoryScreen extends StatelessWidget {
                   children: [
                     CategoryPage(slug: '/products', isSubList: true),
                     BrandHomePage(slug: '/brands', isSubList: true),
-                    ShopHomePage(slug: '/products', isSubList: true),
+                    ShopHomePage(slug: '', isSubList: true),
                   ],
                 ),
               ),

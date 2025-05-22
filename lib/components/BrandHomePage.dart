@@ -10,7 +10,11 @@ class BrandHomePage extends StatefulWidget {
   final String slug;
   final bool isSubList;
 
-  const BrandHomePage({Key? key, required this.slug, this.isSubList = false}) : super(key: key);
+  const BrandHomePage({
+    Key? key,
+    required this.slug,
+    this.isSubList = false,
+  }) : super(key: key);
 
   @override
   _BrandHomePageState createState() => _BrandHomePageState();
@@ -29,11 +33,14 @@ class _BrandHomePageState extends State<BrandHomePage> {
 
   Future<void> _fetchCategoryList() async {
     try {
-      // Sử dụng URL cố định
-      final response = await http.get(Uri.parse('http://10.0.2.2:5000/brands'));
+      // Thay URL API đúng từ backend
+      final response = await http.get(
+        Uri.parse('http://192.168.54.104:5000/brands'), // Đảm bảo rằng API này có thể truy cập từ frontend
+      );
+
       if (response.statusCode == 200) {
         final body = json.decode(response.body);
-        log(body.toString());
+        log('Response: ${json.encode(body)}');
         setState(() {
           brandModel = BrandModel.fromJson(body);
           isLoading = false;
@@ -60,6 +67,7 @@ class _BrandHomePageState extends State<BrandHomePage> {
     if (brandModel == null || brandModel!.results.isEmpty) {
       return const Center(child: Text('No brands found.'));
     }
+
     return createListView(brandModel!);
   }
 

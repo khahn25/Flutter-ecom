@@ -34,7 +34,7 @@ class _CategoryPageState extends State<CategoryPage> {
 
     try {
       // Thay thế URL động bằng URL cố định
-      final response = await http.get(Uri.parse('http://localhost:5000/categories'));
+      final response = await http.get(Uri.parse('http://192.168.54.104:5000/categories'));
 
       if (response.statusCode == 200) {
         final List<dynamic> body = json.decode(response.body);
@@ -95,10 +95,10 @@ class _CategoryPageState extends State<CategoryPage> {
           final item = categories[index];
 
           return GridTilesCategory(
-            name: item.name ?? 'No Name',
-            imageUrl: item.image ?? '',
-            slug: item.slug ?? '',
-            fromSubProducts: widget.isSubList,
+            name: item.label,
+  imageUrl: '', // Không có ảnh trong schema hiện tại
+  slug: item.value,
+  fromSubProducts: widget.isSubList,
           );
         },
       ),

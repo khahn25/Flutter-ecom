@@ -32,43 +32,81 @@ class ProductsModels {
 }
 
 class Results {
-  final String name;
-  final String slug;
-  final List<String> imageUrls;
-  final String priceType;
-  final String maxPrice;
-  final String minPrice;
-  final String minDiscountedPrice;
+  final String id;
+  final String title;
+  final String description;
+  final double price;
+  final double discountPercentage;
+  final double rating;
+  final int stock;
+  final String brand;
+  final String category;
+  final String thumbnail;
+  final List<String> images;
+  final List<dynamic>? colors;
+  final List<dynamic>? sizes;
+  final List<String>? highlights;
+  final double? discountPrice;
+  final bool deleted;
 
   Results({
-    required this.name,
-    required this.slug,
-    this.imageUrls = const [],
-    required this.priceType,
-    required this.maxPrice,
-    required this.minPrice,
-    required this.minDiscountedPrice,
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.price,
+    required this.discountPercentage,
+    required this.rating,
+    required this.stock,
+    required this.brand,
+    required this.category,
+    required this.thumbnail,
+    required this.images,
+    this.colors,
+    this.sizes,
+    this.highlights,
+    this.discountPrice,
+    this.deleted = false,
   });
 
   factory Results.fromJson(Map<String, dynamic> json) {
     return Results(
-      name: json['name'] ?? '',
-      slug: json['slug'] ?? '',
-      imageUrls: (json['image_urls'] as List<dynamic>?)?.cast<String>() ?? [],
-      priceType: json['price_type'] ?? '',
-      maxPrice: json['max_price'] ?? '0',
-      minPrice: json['min_price'] ?? '0',
-      minDiscountedPrice: json['min_discounted_price'] ?? '0',
+      id: json['id'] ?? '',
+      title: json['title'] ?? '',
+      description: json['description'] ?? '',
+      price: (json['price'] ?? 0).toDouble(),
+      discountPercentage: (json['discountPercentage'] ?? 0).toDouble(),
+      rating: (json['rating'] ?? 0).toDouble(),
+      stock: json['stock'] ?? 0,
+      brand: json['brand'] ?? '',
+      category: json['category'] ?? '',
+      thumbnail: json['thumbnail'] ?? '',
+      images: (json['images'] as List<dynamic>?)?.cast<String>() ?? [],
+      colors: json['colors'] ?? [],
+      sizes: json['sizes'] ?? [],
+      highlights: (json['highlights'] as List<dynamic>?)?.cast<String>(),
+      discountPrice: json['discountPrice'] != null
+          ? (json['discountPrice']).toDouble()
+          : null,
+      deleted: json['deleted'] ?? false,
     );
   }
 
   Map<String, dynamic> toJson() => {
-        'name': name,
-        'slug': slug,
-        'image_urls': imageUrls,
-        'price_type': priceType,
-        'max_price': maxPrice,
-        'min_price': minPrice,
-        'min_discounted_price': minDiscountedPrice,
+        'id': id,
+        'title': title,
+        'description': description,
+        'price': price,
+        'discountPercentage': discountPercentage,
+        'rating': rating,
+        'stock': stock,
+        'brand': brand,
+        'category': category,
+        'thumbnail': thumbnail,
+        'images': images,
+        'colors': colors,
+        'sizes': sizes,
+        'highlights': highlights,
+        'discountPrice': discountPrice,
+        'deleted': deleted,
       };
 }

@@ -11,7 +11,7 @@ import 'package:food_delivery/components/AppSignIn.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); // khởi tạo Firebase
+  await Firebase.initializeApp(); 
   runApp(MyApp());
 }
 
@@ -43,9 +43,9 @@ class AuthGate extends StatelessWidget {
             body: Center(child: CircularProgressIndicator()),
           );
         } else if (snapshot.hasData) {
-          return MyHomePage(); // đã đăng nhập
+          return MyHomePage(); 
         } else {
-          return AppSignIn(); // chưa đăng nhập
+          return AppSignIn(); 
         }
       },
     );
@@ -54,7 +54,6 @@ class AuthGate extends StatelessWidget {
 
 int currentIndex = 0;
 
-/// Sử dụng để điều hướng giữa các tab
 void navigateToScreens(int index) {
   currentIndex = index;
 }

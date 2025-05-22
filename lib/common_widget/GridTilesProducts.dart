@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/screens/ProductDetailScreen.dart';
 
@@ -20,61 +19,58 @@ class GridTilesProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        log("Navigating to: $slug");
+        final fullSlug = "/products/$slug/";
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ProductDetailScreen(slug: "products/$slug/"),
+            builder: (context) => ProductDetailScreen(slug: fullSlug),
           ),
         );
       },
-      child: Container(
-        padding: const EdgeInsets.only(top: 5),
-        child: Card(
-          color: Colors.white,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8.0)),
-          ),
-          elevation: 0,
-          child: Center(
-            child: Column(
-              children: <Widget>[
-                Image.network(
-                  imageUrl,
-                  width: 150,
-                  height: 150,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) =>
-                      const Icon(Icons.image_not_supported, size: 50, color: Colors.grey),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                  child: Text(
-                    name.length <= 40 ? name : "${name.substring(0, 40)}...",
-                    textAlign: TextAlign.left,
-                    style: const TextStyle(
-                      color: Color(0xFF444444),
-                      fontFamily: 'Roboto',
-                      fontSize: 15,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  child: Text(
-                    price != null ? "VND $price" : "Unavailable",
-                    style: TextStyle(
-                      color: price != null ? const Color(0xFFf67426) : const Color(0xFF0dc2cd),
-                      fontFamily: 'Roboto',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                )
-              ],
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        elevation: 2,
+        margin: const EdgeInsets.all(6),
+        child: Column(
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
+              child: Image.network(
+                imageUrl,
+                height: 120,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) =>
+                    const Icon(Icons.image_not_supported, size: 50),
+              ),
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+              child: Text(
+                name.length <= 40 ? name : "${name.substring(0, 40)}...",
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Text(
+                price != null ? " $price" : "Unavailable",
+                style: TextStyle(
+                  color: price != null ? const Color(0xFFf67426) : Colors.grey,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

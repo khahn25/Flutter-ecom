@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/models/CategoryModel.dart';
 import 'package:food_delivery/common_widget/CircularProgress.dart';
 import 'package:food_delivery/common_widget/GridTilesCategory.dart';
-import 'package:food_delivery/utils/Urls.dart';
 import 'package:http/http.dart' as http;
 
 class CategoryPage extends StatefulWidget {
@@ -34,7 +33,8 @@ class _CategoryPageState extends State<CategoryPage> {
     });
 
     try {
-      final response = await http.get(Uri.parse(Urls.CORE_BASE_URL + widget.slug));
+      // Thay thế URL động bằng URL cố định
+      final response = await http.get(Uri.parse('http://192.168.54.104:5000/categories'));
 
       if (response.statusCode == 200) {
         final List<dynamic> body = json.decode(response.body);
@@ -95,10 +95,10 @@ class _CategoryPageState extends State<CategoryPage> {
           final item = categories[index];
 
           return GridTilesCategory(
-            name: item.name ?? 'No Name',
-            imageUrl: item.image ?? '', 
-            slug: item.slug ?? '',       
-            fromSubProducts: widget.isSubList,
+            name: item.label,
+  imageUrl: '', // Không có ảnh trong schema hiện tại
+  slug: item.value,
+  fromSubProducts: widget.isSubList,
           );
         },
       ),

@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/common_widget/CircularProgress.dart';
 import 'package:food_delivery/common_widget/GridTilesCategory.dart';
-import 'package:food_delivery/utils/Urls.dart';
 import 'package:http/http.dart' as http;
 import '../models/BrandModel.dart';
 
@@ -11,7 +10,11 @@ class BrandHomePage extends StatefulWidget {
   final String slug;
   final bool isSubList;
 
-  const BrandHomePage({Key? key, required this.slug, this.isSubList = false}) : super(key: key);
+  const BrandHomePage({
+    Key? key,
+    required this.slug,
+    this.isSubList = false,
+  }) : super(key: key);
 
   @override
   _BrandHomePageState createState() => _BrandHomePageState();
@@ -30,16 +33,20 @@ class _BrandHomePageState extends State<BrandHomePage> {
 
   Future<void> _fetchCategoryList() async {
     try {
-      final response = await http.get(Uri.parse(Urls.CORE_BASE_URL + widget.slug));
+      // Thay URL API đúng từ backend
+      final response = await http.get(
+        Uri.parse('http://192.168.54.104:5000/brands'), // Đảm bảo rằng API này có thể truy cập từ frontend
+      );
+
       if (response.statusCode == 200) {
         final body = json.decode(response.body);
-        log(body.toString());
+        log('Response: ${json.encode(body)}');
         setState(() {
           brandModel = BrandModel.fromJson(body);
           isLoading = false;
         });
       } else {
-        throw Exception('Failed to load categories');
+        throw Exception('Failed to load brands');
       }
     } catch (e) {
       setState(() {
@@ -58,8 +65,9 @@ class _BrandHomePageState extends State<BrandHomePage> {
       return Center(child: Text(errorMessage!));
     }
     if (brandModel == null || brandModel!.results.isEmpty) {
-      return const Center(child: Text('No categories found.'));
+      return const Center(child: Text('No brands found.'));
     }
+
     return createListView(brandModel!);
   }
 
@@ -76,9 +84,9 @@ class _BrandHomePageState extends State<BrandHomePage> {
       itemBuilder: (context, index) {
         final item = brandData.results[index];
         return GridTilesCategory(
-          name: item.name,
+          name: item.label,
           imageUrl: item.imageUrl,
-          slug: item.slug,
+          slug: item.value,
         );
       },
     );

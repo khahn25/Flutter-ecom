@@ -1,8 +1,6 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/screens/ProductsScreen.dart';
 import 'package:food_delivery/screens/SubCategoryScreen.dart';
-
 
 class GridTilesCategory extends StatelessWidget {
   final String name;
@@ -23,7 +21,6 @@ class GridTilesCategory extends StatelessWidget {
     return InkWell(
       onTap: () {
         if (fromSubProducts) {
-          log(slug);
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -43,27 +40,39 @@ class GridTilesCategory extends StatelessWidget {
         }
       },
       child: Card(
-        color: Colors.white,
-        elevation: 0,
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              Image.network(
-                imageUrl,
-                width: 100,
-                height: 100,
-                errorBuilder: (context, error, stackTrace) => Icon(Icons.image_not_supported),
-              ),
-              Text(
-                name,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 12,
-                  fontFamily: 'Roboto',
+        elevation: 1,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              flex: 7,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.network(
+                  imageUrl,
+                  fit: BoxFit.contain,
+                  errorBuilder: (context, error, stackTrace) =>
+                      const Icon(Icons.image_not_supported),
                 ),
-              )
-            ],
-          ),
+              ),
+            ),
+            Expanded(
+              flex: 3,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: Text(
+                  name,
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

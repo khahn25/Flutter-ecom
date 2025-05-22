@@ -19,7 +19,7 @@ class GridTilesProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        final fullSlug = "products/$slug/";
+        final fullSlug = "/products/$slug/";
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -62,7 +62,7 @@ class GridTilesProducts extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
-                price != null ? "VND $price" : "Unavailable",
+                price != null ? " $price" : "Unavailable",
                 style: TextStyle(
                   color: price != null ? const Color(0xFFf67426) : Colors.grey,
                   fontSize: 14,

@@ -66,7 +66,7 @@ Future<ProductsModels> getProductList(String slug, bool isSubList) async {
       final response = await http.get(Uri.parse(Urls.CORE_BASE_URL + slug));
       if (response.statusCode == 200) {
         final body = json.decode(response.body);
-        products = ProductsModels.fromJson(body);
+        products = ProductsModels.dynamicFromJson(body);
         return products!;
       } else {
         throw Exception('Failed to load products');

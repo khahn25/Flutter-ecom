@@ -37,7 +37,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Chi tiết sản phẩm")),
+      appBar: AppBar(title: const Text("Product Details")),
       body: FutureBuilder<ProductDetails>(
         future: productDetailsFuture,
         builder: (context, snapshot) {
@@ -45,12 +45,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text("Lỗi: ${snapshot.error}"));
-          } else if (!snapshot.hasData || snapshot.data!.data == null) {
+          } else if (!snapshot.hasData) {
             return const Center(child: Text("Không có dữ liệu"));
           }
 
-          final data = snapshot.data!.data!;
-          final variant = data.productVariants.isNotEmpty ? data.productVariants[0] : null;
+          final data = snapshot.data!;
 
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16),
@@ -58,9 +57,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Image
-                if (variant != null && variant.productImages.isNotEmpty)
+                if (data.images.isNotEmpty)
                   Image.network(
-                    variant.productImages[0],
+                    data.images[0],
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -70,7 +69,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
                 // Tên sản phẩm
                 Text(
-                  variant?.productName ?? "Không rõ tên",
+                  data.title,
                   style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
 
@@ -78,47 +77,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
                 // Giá
                 Text(
-                  "Giá: ${variant?.minPrice ?? 'N/A'} - ${variant?.maxPrice ?? 'N/A'}",
+                  "Price: \$${data.price.toStringAsFixed(2)}",
                   style: const TextStyle(fontSize: 18, color: Colors.redAccent),
                 ),
+
+                const SizedBox(height: 8),
+
+                // Đánh giá
+                Text("Rate: ${data.rating} ⭐"),
 
                 const SizedBox(height: 16),
 
                 // Mô tả sản phẩm
                 Text(
-                  variant?.productDescription ?? "Không có mô tả.",
+                  data.description,
                   style: const TextStyle(fontSize: 16),
                 ),
-
-                const SizedBox(height: 16),
-
-                // Thuộc tính
-                if (data.attributes.isNotEmpty) ...[
-                  const Text("Thuộc tính:", style: TextStyle(fontWeight: FontWeight.bold)),
-                  ...data.attributes.map((attr) => Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("${attr.attributeName}:"),
-                          Wrap(
-                            spacing: 8,
-                            children: attr.attributeValues
-                                .map((e) => Chip(label: Text(e.value)))
-                                .toList(),
-                          ),
-                        ],
-                      )),
-                ],
-
-                const SizedBox(height: 16),
-
-                // Thông số kỹ thuật
-                if (data.productSpecifications.isNotEmpty) ...[
-                  const Text("Thông số kỹ thuật:", style: TextStyle(fontWeight: FontWeight.bold)),
-                  ...data.productSpecifications.map((spec) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 2),
-                        child: Text("- ${spec.specificationName}: ${spec.specificationValue}"),
-                      )),
-                ],
               ],
             ),
           );

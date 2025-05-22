@@ -43,7 +43,7 @@ class SubCategoryScreen extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    CategoryPage(slug: '/products', isSubList: true),
+                    CategoryPage(slug: '/products/oppo-f19-pro-plus', isSubList: true),
                     BrandHomePage(slug: '/brands', isSubList: true),
                     ShopHomePage(slug: '', isSubList: true),
                   ],

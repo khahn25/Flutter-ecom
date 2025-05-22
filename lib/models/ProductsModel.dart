@@ -23,6 +23,27 @@ class ProductsModels {
     );
   }
 
+  factory ProductsModels.fromList(List<dynamic> jsonList) {
+    List<Results> products =
+        jsonList.map((item) => Results.fromJson(item)).toList();
+    return ProductsModels(
+      count: products.length,
+      results: products,
+      next: null,
+      previous: null,
+    );
+  }
+
+  factory ProductsModels.dynamicFromJson(dynamic json) {
+    if (json is List) {
+      return ProductsModels.fromList(json);
+    } else if (json is Map<String, dynamic>) {
+      return ProductsModels.fromJson(json);
+    } else {
+      throw Exception('Unsupported JSON format');
+    }
+  }
+
   Map<String, dynamic> toJson() => {
         'count': count,
         'next': next,
